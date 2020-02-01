@@ -14,6 +14,8 @@ public class Pruebas : MonoBehaviour
     public float waitDuration;
     public float crushDuration;
 
+    public List<Animator> anim;
+
     private void Start()
     {
         blueToken.transform.position = initCasilla.position;
@@ -27,6 +29,9 @@ public class Pruebas : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.Q))
             Reset();
+        
+        if(Input.GetKeyDown(KeyCode.W))
+            RollDices();
     }
 
     IEnumerator CrushOpponent()
@@ -41,5 +46,13 @@ public class Pruebas : MonoBehaviour
         blueToken.transform.position = initCasilla.position;
         redToken.transform.localScale = new Vector3(1, 1, 1);
 
+    }
+
+    private void RollDices()
+    {
+        foreach (var a in anim)
+        {
+            a.SetInteger("DiceValue", 1);
+        }
     }
 }

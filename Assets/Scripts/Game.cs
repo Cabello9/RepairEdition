@@ -302,4 +302,40 @@ public class Game : Singleton<Game>
         if (selectedCell.rightCell != null)
             selectedCell = selectedCell.rightCell;
     }
+    
+    private bool CheckTokenInCell(Turn turn, Cell cell)
+    {
+        if (turn == Turn.PlayerOne)
+        {
+            if (cell.playerOneToken != null)
+                return true;
+            
+            return false;
+        }
+
+        if(turn == Turn.PlayerTwo)
+        {
+            if (cell.playerTwoToken != null)
+                return true;
+            
+            return false;
+        }
+
+        return false;
+    }
+
+    public void SelectCell()
+    {
+        if (CheckTokenInCell(turn, selectedCell))
+        {
+            if (turn == Turn.PlayerOne)
+            {
+                Move(selectedCell.playerOneToken);
+            }
+            else if (turn == Turn.PlayerTwo)
+            {
+                Move(selectedCell.playerTwoToken);
+            }
+        }
+    }
 }

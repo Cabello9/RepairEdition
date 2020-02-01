@@ -17,7 +17,15 @@ public class GameVisualManager : Singleton<GameVisualManager>
     public Color PlayerOneColor;
     public Color PlayerTwoColor;
 
+    public List<Dice> dices;
+
     public bool isPlayerOneTurn = true;
+
+    public Transform mainCamera;
+    public Transform initCameraPoint;
+    public Transform diceCameraPoint;
+    public GameObject hud;
+    public TextMeshProUGUI diceValue;
 
     private void Start()
     {
@@ -62,5 +70,49 @@ public class GameVisualManager : Singleton<GameVisualManager>
     {
         PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
         PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Turno del Jugador 2";
+    }
+
+    public void StartThrowDicesCinematic()
+    {
+        StartCoroutine(ThrowDicesCoroutine());
+    }
+
+    IEnumerator ThrowDicesCoroutine()
+    {
+        int totalDicesValue;
+        
+        DisableHUD();
+        GoToDiceCameraPosition();
+        yield return new WaitForSeconds(2f);
+        totalDicesValue = Game.Instance.ThrowDices();
+        SetDiceValueHUD(totalDicesValue);
+        yield return new WaitForSeconds(3f);
+        GoToInitCameraPosition();
+        EnableHUD();
+    }
+
+    private void GoToDiceCameraPosition()
+    {
+        mainCamera.DOMove(diceCameraPoint.position, 1.5f);
+    }
+
+    private void GoToInitCameraPosition()
+    {
+        mainCamera.DOMove(initCameraPoint.position, 1.5f);
+    }
+
+    private void DisableHUD()
+    {
+        hud.SetActive(false);
+    }
+
+    private void EnableHUD()
+    {
+        hud.SetActive(true);
+    }
+
+    private void SetDiceValueHUD(int value)
+    {
+        diceValue.text = value.ToString();
     }
 }
