@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Board
 {
-    public List<Cell> board;
+    public List<Cell> cells;
 
     public Cell UpCell(Cell currentCell)
     {

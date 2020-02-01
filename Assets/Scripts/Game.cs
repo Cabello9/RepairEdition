@@ -9,10 +9,12 @@ public class Game : MonoBehaviour
     public List<Token> playerOneTokens;
     public List<Token> playerTwoTokens;
 
-    private readonly int numberOfDices = 4;
-    public bool playerOneTurn;
     public Cell selectedCell;
 
+    private readonly int numberOfDices = 4;
+    public bool playerOneTurn;
+
+    public int remainingMoves;
 
     public int ThrowDices()
     {
@@ -26,9 +28,49 @@ public class Game : MonoBehaviour
         return result;
     }
 
-    public void MoveToken()
+    public void Move(Token token)
     {
-        //if(selectedCell.)
+        while (ThereAreMoreMoves())
+        {
+            Advance(token);
+        }
+    }
+
+    private bool ThereAreMoreMoves()
+    {
+        return remainingMoves > 0;
+    }
+
+    private void Advance(Token token)
+    {
+        if (CanAdvance(token))
+        {
+
+        }
+    }
+
+    public bool CanAdvance(Token token)
+    {
+        return (token.isPlayerOne && token.cell.nextCellPlayerOne != null) || (!token.isPlayerOne && token.cell.nextCellPlayerTwo != null);
+    }
+
+    public bool ThereIsTeamToken(Token token, Cell cell)
+    {
+        bool thereIsToken = false;
+        if (token.isPlayerOne)
+        {
+
+            foreach(Cell c in board.cells)
+            {
+                //if(cell)
+            }
+        }
+        return thereIsToken;
+    }
+
+    public bool ThereIsEnemyToken(Token token, Cell cell)
+    {
+        return false;
     }
 
     public void SelectUpCell()
