@@ -8,8 +8,18 @@ public class ButtonBehaviour : MonoBehaviour
     public AnimationCurve curve;
     public float duration = 0.2f;
 
-    public void Animate()
+    public void OnClick()
     {
         transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), duration).SetEase(curve);
+    }
+
+    public void OnSelect()
+    {
+        transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.2f);
+    }
+
+    public void OnDeselect()
+    {
+        transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
     }
 }
