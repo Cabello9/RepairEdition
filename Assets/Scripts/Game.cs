@@ -97,11 +97,13 @@ public class Game : Singleton<Game>
             {
                 token.cell.playerTwoToken.cell = playerTwoStart;
                 StartCoroutine(CrushOpponent(token, token.cell.playerTwoToken, token.cell.transform.GetChild(0)));
+                token.cell.playerTwoToken = null;
             }
             else
             {
                 token.cell.playerOneToken.cell = playerOneStart;
                 StartCoroutine(CrushOpponent(token, token.cell.playerOneToken, token.cell.transform.GetChild(0)));
+                token.cell.playerOneToken = null;
             }
         }
         
