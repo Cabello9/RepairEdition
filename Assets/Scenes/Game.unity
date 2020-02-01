@@ -796,6 +796,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4586be810ad0e4842a044782d09de109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPosition: {x: 0, y: 0, z: 0}
+  initialRotation: {x: 0, y: 0, z: 0, w: 0}
   isPlayerOne: 1
   cell: {fileID: 1464829676}
   goalReached: 0
@@ -804,7 +806,34 @@ MonoBehaviour:
   ownScale: {x: 0.5, y: 0.5, z: 0.5}
   JumpCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.6563488
+      outSlope: 0.6563488
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.73344785
+      value: 0.48139763
+      inSlope: 0.29266885
+      outSlope: 0.29266885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06113345
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.9455944
+      outSlope: 1.9455944
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -2401,6 +2430,7 @@ MonoBehaviour:
   turn: 1
   throwAgain: 0
   defaultCell: {fileID: 1480157406}
+  canThrowDices: 0
 --- !u!1001 &878210492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3109,6 +3139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4586be810ad0e4842a044782d09de109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPosition: {x: 0, y: 0, z: 0}
+  initialRotation: {x: 0, y: 0, z: 0, w: 0}
   isPlayerOne: 1
   cell: {fileID: 1464829676}
   goalReached: 0
@@ -3117,7 +3149,34 @@ MonoBehaviour:
   ownScale: {x: 0.5, y: 0.5, z: 0.5}
   JumpCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.6563488
+      outSlope: 0.6563488
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.73344785
+      value: 0.48139763
+      inSlope: 0.29266885
+      outSlope: 0.29266885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06113345
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.9455944
+      outSlope: 1.9455944
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -4319,6 +4378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4586be810ad0e4842a044782d09de109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPosition: {x: 0, y: 0, z: 0}
+  initialRotation: {x: 0, y: 0, z: 0, w: 0}
   isPlayerOne: 1
   cell: {fileID: 1464829676}
   goalReached: 0
@@ -4327,7 +4388,34 @@ MonoBehaviour:
   ownScale: {x: 0.5, y: 0.5, z: 0.5}
   JumpCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.6563488
+      outSlope: 0.6563488
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.73344785
+      value: 0.48139763
+      inSlope: 0.29266885
+      outSlope: 0.29266885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06113345
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.9455944
+      outSlope: 1.9455944
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -4822,6 +4910,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4586be810ad0e4842a044782d09de109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPosition: {x: 0, y: 0, z: 0}
+  initialRotation: {x: 0, y: 0, z: 0, w: 0}
   isPlayerOne: 1
   cell: {fileID: 1464829676}
   goalReached: 0
@@ -4830,7 +4920,34 @@ MonoBehaviour:
   ownScale: {x: 0.5, y: 0.5, z: 0.5}
   JumpCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.6563488
+      outSlope: 0.6563488
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.73344785
+      value: 0.48139763
+      inSlope: 0.29266885
+      outSlope: 0.29266885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06113345
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.9455944
+      outSlope: 1.9455944
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -4852,6 +4969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4586be810ad0e4842a044782d09de109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPosition: {x: 0, y: 0, z: 0}
+  initialRotation: {x: 0, y: 0, z: 0, w: 0}
   isPlayerOne: 1
   cell: {fileID: 1464829676}
   goalReached: 0
@@ -4860,7 +4979,34 @@ MonoBehaviour:
   ownScale: {x: 0.5, y: 0.5, z: 0.5}
   JumpCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.6563488
+      outSlope: 0.6563488
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.73344785
+      value: 0.48139763
+      inSlope: 0.29266885
+      outSlope: 0.29266885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06113345
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.9455944
+      outSlope: 1.9455944
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

@@ -33,19 +33,19 @@ public class GameInputManager : Singleton<GameInputManager>
 
     private void CheckPlayerOneInput()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKeyDown(KeyCode.W) && Game.Instance.remainingMoves > 0)
         {
             Game.Instance.SelectUpCell();
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.A) && Game.Instance.remainingMoves > 0)
         {
             Game.Instance.SelectLeftCell();
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S) && Game.Instance.remainingMoves > 0)
         {
             Game.Instance.SelectDownCell();
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.D) && Game.Instance.remainingMoves > 0)
         {
             Game.Instance.SelectRightCell();
         }
@@ -68,19 +68,19 @@ public class GameInputManager : Singleton<GameInputManager>
 
     private void CheckPlayerTwoInput()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if(Input.GetKeyDown(KeyCode.I) && Game.Instance.remainingMoves > 0)
         {
             Game.Instance.SelectUpCell();
         }
-        else if (Input.GetKeyDown(KeyCode.J))
+        else if (Input.GetKeyDown(KeyCode.J) && Game.Instance.remainingMoves > 0)
         {
             Game.Instance.SelectLeftCell(); 
         }
-        else if (Input.GetKeyDown(KeyCode.K))
+        else if (Input.GetKeyDown(KeyCode.K) && Game.Instance.remainingMoves > 0)
         {
             Game.Instance.SelectDownCell();
         }
-        else if (Input.GetKeyDown(KeyCode.L))
+        else if (Input.GetKeyDown(KeyCode.L) && Game.Instance.remainingMoves > 0)
         {
             Game.Instance.SelectRightCell();
         }

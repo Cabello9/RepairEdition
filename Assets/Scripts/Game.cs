@@ -23,14 +23,18 @@ public class Game : Singleton<Game>
     public bool throwAgain;
 
     public Cell defaultCell;
+    public bool canThrowDices;
 
     private void Start()
     {
         turn = Turn.PlayerOne;
+        canThrowDices = true;
     }
 
     public void ChangeTurn()
     {
+        canThrowDices = true;
+        ResetDices();
         LightOffDefaultCell();
         switch (turn)
         {
@@ -74,6 +78,8 @@ public class Game : Singleton<Game>
 
     public void Move(Token token)
     {
+        Cell lastCell = token.cell;
+        
         while (ThereAreMoreMoves())
         {
             Advance(token);
@@ -83,10 +89,12 @@ public class Game : Singleton<Game>
 
         if (token.isPlayerOne)
         {
+            lastCell.playerOneToken = null;
             token.cell.playerOneToken = token;
         }
         else
         {
+            lastCell.playerTwoToken = null;
             token.cell.playerTwoToken = token;
         }
 
@@ -96,11 +104,13 @@ public class Game : Singleton<Game>
             {
                 token.cell.playerTwoToken.cell = playerTwoStart;
                 StartCoroutine(CrushOpponent(token, token.cell.playerTwoToken, token.cell.transform.GetChild(0)));
+                token.cell.playerTwoToken = null;
             }
             else
             {
                 token.cell.playerOneToken.cell = playerOneStart;
                 StartCoroutine(CrushOpponent(token, token.cell.playerOneToken, token.cell.transform.GetChild(0)));
+                token.cell.playerOneToken = null;
             }
         }
         
@@ -111,15 +121,6 @@ public class Game : Singleton<Game>
             if (token.goalReached)
             {
                 token.gameObject.SetActive(false);
-
-                if (turn == Turn.PlayerOne)
-                {
-                    p1Points++;
-                }
-                else if (turn == Turn.PlayerTwo)
-                {
-                    p2Points++;
-                }
             }
 
             if (p1Points == 7)
@@ -141,6 +142,7 @@ public class Game : Singleton<Game>
             LightOffDefaultCell();
             token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
             GameVisualManager.Instance.RollAgain();
+            canThrowDices = true;
             
         }
     }
