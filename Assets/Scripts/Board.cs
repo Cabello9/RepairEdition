@@ -4,8 +4,26 @@ using UnityEngine;
 
 public class Board
 {
-    public List<Cell> cells;
-    public List<Token> tokens;
+    public List<Cell> board;
 
-    
+    public Cell UpCell(Cell currentCell)
+    {
+        return currentCell.upCell;
+    }
+
+    public Cell LeftCell(Cell currentCell)
+    {
+        return currentCell.leftCell;
+    }
+
+    public Cell DownCell(Cell currentCell)
+    {
+        return currentCell.downCell;
+    }
+
+    public Cell RightCell(Cell currentCell)
+    {
+        return currentCell.rightCell;
+    }
+
 }
