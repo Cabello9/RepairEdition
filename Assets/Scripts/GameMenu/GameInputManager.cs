@@ -49,8 +49,9 @@ public class GameInputManager : Singleton<GameInputManager>
         {
             Game.Instance.SelectRightCell();
         }
-        else if (Input.GetKeyDown(KeyCode.Q)) //Tirar dados
+        else if (Input.GetKeyDown(KeyCode.Q) && Game.Instance.canThrowDices) //Tirar dados
         {
+            Game.Instance.canThrowDices = false;
             GameVisualManager.Instance.StartThrowDicesCinematic();
             Game.Instance.throwAgain = false;
         }
@@ -83,8 +84,9 @@ public class GameInputManager : Singleton<GameInputManager>
         {
             Game.Instance.SelectRightCell();
         }
-        else if (Input.GetKeyDown(KeyCode.U)) //Tirar dados
+        else if (Input.GetKeyDown(KeyCode.U) && Game.Instance.canThrowDices) //Tirar dados
         {
+            Game.Instance.canThrowDices = false;
             GameVisualManager.Instance.StartThrowDicesCinematic();
             Game.Instance.throwAgain = false;
         }
