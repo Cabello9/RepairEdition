@@ -77,9 +77,32 @@ public class Game : Singleton<Game>
                 StartCoroutine(CrushOpponent(token, token.cell.playerOneToken, token.cell.transform.GetChild(0)));
             }
         }
-        else if (!token.throwAgain)
+        
+        if (!token.throwAgain)
         {
-            StartCoroutine(ChangeTurnCoroutine(token));
+            if (token.goalReached)
+            {
+                token.gameObject.SetActive(false);
+
+                if (turn == Turn.PlayerOne)
+                {
+                    p1Points++;
+                }
+                else if (turn == Turn.PlayerTwo)
+                {
+                    p2Points++;
+                }
+            }
+
+            if (p1Points == 7)
+            {
+                //Ha ganado alguien
+                Debug.Log("Jugador 1 ha ganado");
+            }
+            else if (p2Points == 7)
+            {
+               Debug.Log("Jugador 2 ha ganado"); 
+            }
         }
     }
 
@@ -296,23 +319,42 @@ public class Game : Singleton<Game>
     public void SelectUpCell()
     {
         if (selectedCell.upCell != null)
+        {
+            selectedCell.transform.GetChild(1).gameObject.SetActive(false);
             selectedCell = selectedCell.upCell;
+            selectedCell.transform.GetChild(1).gameObject.SetActive(true);
+        }
+            
     }
 
     public void SelectLeftCell()
     {
         if (selectedCell.leftCell != null)
+        {
+            selectedCell.transform.GetChild(1).gameObject.SetActive(false);
             selectedCell = selectedCell.leftCell;
+            selectedCell.transform.GetChild(1).gameObject.SetActive(true);
+        }
     }
     public void SelectDownCell()
     {
         if (selectedCell.downCell != null)
+        {
+            selectedCell.transform.GetChild(1).gameObject.SetActive(false);
             selectedCell = selectedCell.downCell;
+            selectedCell.transform.GetChild(1).gameObject.SetActive(true);
+        }
+            
     }
     public void SelectRightCell()
     {
         if (selectedCell.rightCell != null)
+        {
+            selectedCell.transform.GetChild(1).gameObject.SetActive(false);
             selectedCell = selectedCell.rightCell;
+            selectedCell.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        
     }
     
     private bool CheckTokenInCell(Turn turn, Cell cell)
