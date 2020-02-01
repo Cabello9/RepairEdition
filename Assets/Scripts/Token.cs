@@ -5,6 +5,7 @@ public class Token : MonoBehaviour
 {
     public bool isPlayerOne;
     public Cell cell;
+    public AnimationCurve JumpCurve;
 
     public void MoveToPosition(Vector3 position, float duration)
     {
@@ -16,14 +17,18 @@ public class Token : MonoBehaviour
         transform.DOLookAt(target, duration);
     }
 
-    public void JumpToPosition(Vector3 position, float duration)
+    public void Kill(Vector3 position, float duration)
     {
-        transform.DOJump(position,1f,1, duration);
+        transform.DOJump(position,1.5f,1, duration).SetEase(JumpCurve);
     }
 
     public void CrushYAxis(float finalY,float duration)
     {
-        //Los tokens tienen un padre para que solo se escalen en una sola dirección
-        transform.parent.transform.DOScaleY(finalY, duration);
+        transform.DOScaleY(finalY, duration);
+    }
+    
+    public void JumpToPosition(Vector3 position, float duration)
+    {
+        transform.DOJump(position, 1f, 1, duration);
     }
 }
