@@ -31,6 +31,8 @@ public class Game : Singleton<Game>
 
     public void ChangeTurn()
     {
+        ResetDices();
+        LightOffDefaultCell();
         switch (turn)
         {
             case Turn.None:
@@ -79,6 +81,16 @@ public class Game : Singleton<Game>
             UpdateMovements(token);
             
         }
+
+        if (token.isPlayerOne)
+        {
+            token.cell.playerOneToken = token;
+        }
+        else
+        {
+            token.cell.playerTwoToken = token;
+        }
+
         if (token.hasToKillToken)
         {
             if (token.isPlayerOne)
@@ -127,8 +139,10 @@ public class Game : Singleton<Game>
         }
         else
         {
+            LightOffDefaultCell();
             token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
-            token.throwAgain = false;
+            GameVisualManager.Instance.RollAgain();
+            
         }
     }
 
@@ -136,6 +150,11 @@ public class Game : Singleton<Game>
     {
         selectedCell = defaultCell;
         selectedCell.transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    public void LightOffDefaultCell()
+    {
+        selectedCell.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     IEnumerator ChangeTurnCoroutine(Token token)

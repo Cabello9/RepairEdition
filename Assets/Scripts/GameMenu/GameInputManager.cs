@@ -58,7 +58,7 @@ public class GameInputManager : Singleton<GameInputManager>
         {
             Game.Instance.SelectCell();
         }
-        else if (Input.GetKeyDown(KeyCode.R) && !Game.Instance.throwAgain) //Nueva ficha
+        else if (Input.GetKeyDown(KeyCode.R) && !Game.Instance.throwAgain && Game.Instance.remainingMoves > 0) //Nueva ficha
         {
             Game.Instance.SpawnNewToken();
         }
@@ -86,12 +86,13 @@ public class GameInputManager : Singleton<GameInputManager>
         else if (Input.GetKeyDown(KeyCode.U)) //Tirar dados
         {
             GameVisualManager.Instance.StartThrowDicesCinematic();
+            Game.Instance.throwAgain = false;
         }
-        else if (Input.GetKeyDown(KeyCode.O)) //Seleccionar
+        else if (Input.GetKeyDown(KeyCode.O) && !Game.Instance.throwAgain) //Seleccionar
         {
             Game.Instance.SelectCell();
         }
-        else if (Input.GetKeyDown(KeyCode.P)) //Nueva ficha
+        else if (Input.GetKeyDown(KeyCode.P) && !Game.Instance.throwAgain && Game.Instance.remainingMoves > 0) //Nueva ficha
         {
             Game.Instance.SpawnNewToken();
         }

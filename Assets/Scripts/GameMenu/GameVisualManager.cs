@@ -94,6 +94,50 @@ public class GameVisualManager : Singleton<GameVisualManager>
         GoToInitCameraPosition();
         EnableHUD();
         Game.Instance.IlluminateDefaultCell();
+        if (totalDicesValue == 0)
+        {
+            Game.Instance.ChangeTurn();
+            LoseTurn();
+        }
+    }
+
+    public void ResetDiceValue()
+    {
+        diceValue.text = "";
+    }
+    
+    public void LoseTurn()
+    {
+        GameInputManager.Instance.canInput = false;
+        if (Game.Instance.turn == Turn.PlayerOne)
+        {
+            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
+        }
+        else if (Game.Instance.turn == Turn.PlayerTwo)
+        {
+            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
+        }
+        
+        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Has perdido el turno";
+        
+        StartCoroutine(PlayerTurnMovement());
+    }
+
+    public void RollAgain()
+    {
+        GameInputManager.Instance.canInput = false;
+        if (Game.Instance.turn == Turn.PlayerOne)
+        {
+            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
+        }
+        else if (Game.Instance.turn == Turn.PlayerTwo)
+        {
+            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
+        }
+        
+        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Tira los dados otra vez";
+        
+        StartCoroutine(PlayerTurnMovement());
     }
 
     private void GoToDiceCameraPosition()
