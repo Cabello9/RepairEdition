@@ -4,24 +4,23 @@ using Random = UnityEngine.Random;
 
 public class Dice : MonoBehaviour
 {
-    private Transform initialPosition;
+    private Vector3 initialTransformPosition;
+    private Quaternion initialRotation;
     private static int maxValue = 1;
     public int currentValue;
     public Animator animator;
 
     private void Awake()
     {
-        initialPosition = transform;
-        animator = GetComponent<Animator>();
-
-        initialPosition.transform.position = transform.parent.transform.position;
-        initialPosition.transform.rotation = transform.parent.transform.rotation;
+       initialTransformPosition = transform.position;
+       initialRotation = transform.rotation;
+       animator = GetComponent<Animator>();
     }
 
     public void ResetPosition()
     {
-        transform.parent.transform.position = initialPosition.transform.position;
-        transform.parent.transform.rotation = initialPosition.transform.rotation;
+        transform.position = initialTransformPosition;
+        transform.rotation = initialRotation;
     }
 
     public void ThrowDice()

@@ -519,6 +519,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerOne: 0
+  cell: {fileID: 0}
+  goalReached: 0
+  hasToJumpToken: 0
+  hasToKillToken: 0
+  throwAgain: 0
+  JumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.6563488
+      outSlope: 0.6563488
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.73344785
+      value: 0.48139763
+      inSlope: 0.29266885
+      outSlope: 0.29266885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06113345
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.9455944
+      outSlope: 1.9455944
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5756222849735841218
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class Token : MonoBehaviour
 {
+    public Vector3 initialPosition;
+    public Quaternion initialRotation;
     public bool isPlayerOne;
     public Cell cell;
     public bool goalReached;
     public bool hasToJumpToken;
     public bool hasToKillToken;
-    public bool throwAgain;
+
+    public Vector3 ownScale;
 
     public AnimationCurve JumpCurve;
 
     private void Start()
     {
         cell.type = CellType.Start;
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+    }
+
+    public void RestoreScale()
+    {
+        transform.localScale = ownScale;
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        gameObject.SetActive(true);
+    }
+
+    public void ResetAll()
+    {
+        goalReached = false;
+        hasToKillToken = false;
+        hasToJumpToken = false;
     }
 
     public void MoveToPosition(Vector3 position, float duration)

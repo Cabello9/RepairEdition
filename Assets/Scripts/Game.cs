@@ -31,7 +31,6 @@ public class Game : Singleton<Game>
 
     public void ChangeTurn()
     {
-        ResetDices();
         LightOffDefaultCell();
         switch (turn)
         {
@@ -178,6 +177,10 @@ public class Game : Singleton<Game>
         murderer.Kill(target.position, 0.5f);
         yield return new WaitForSeconds(0.4f);
         victim.CrushYAxis(0.1f, 0.2f);
+        yield return new WaitForSeconds(0.3f);
+        victim.gameObject.SetActive(false);
+        victim.RestoreScale();
+        victim.ResetAll();
     }
 
     private bool ThereAreMoreMoves()
@@ -198,7 +201,6 @@ public class Game : Singleton<Game>
                     token.goalReached = true;
                     token.hasToJumpToken = false;
                     token.hasToKillToken = false;
-                    token.throwAgain = false;
                     throwAgain = false;
                     break;
                 case CellType.Protection:
@@ -219,7 +221,6 @@ public class Game : Singleton<Game>
                         token.hasToJumpToken = false;
                         token.hasToKillToken = false;
                     }
-                    token.throwAgain = false;
                     throwAgain = false;
                     break;
                 case CellType.Throw:
@@ -258,7 +259,6 @@ public class Game : Singleton<Game>
                             token.hasToKillToken = false;
                         }
                     }
-                    token.throwAgain = true;
                     throwAgain = true;
                     break;
                 case CellType.Normal:
@@ -297,7 +297,6 @@ public class Game : Singleton<Game>
                             token.hasToKillToken = false;
                         }
                     }
-                    token.throwAgain = false;
                     throwAgain = false;
                     break;
                 case CellType.Start:

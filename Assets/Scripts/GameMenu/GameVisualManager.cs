@@ -94,11 +94,14 @@ public class GameVisualManager : Singleton<GameVisualManager>
         GoToInitCameraPosition();
         EnableHUD();
         Game.Instance.IlluminateDefaultCell();
+        
         if (totalDicesValue == 0)
         {
             Game.Instance.ChangeTurn();
             LoseTurn();
         }
+        
+        Game.Instance.ResetDices();
     }
 
     public void ResetDiceValue()
