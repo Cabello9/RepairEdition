@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public enum CellType{None, Normal, Start, Protection, Finnish}
+public enum CellType{None, Normal, Start, Protection, Finish}
 
-public class Cell
+public class Cell : MonoBehaviour
 {
     public CellType type;
 
