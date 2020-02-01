@@ -21,16 +21,19 @@ public class Game : Singleton<Game>
     public int remainingMoves;
     public Turn turn;
     public bool throwAgain;
+    public bool canThrowDices;
 
     public Cell defaultCell;
 
     private void Start()
     {
         turn = Turn.PlayerOne;
+        canThrowDices = true;
     }
 
     public void ChangeTurn()
     {
+        canThrowDices = true;
         ResetDices();
         LightOffDefaultCell();
         switch (turn)
@@ -144,7 +147,7 @@ public class Game : Singleton<Game>
             LightOffDefaultCell();
             token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
             GameVisualManager.Instance.RollAgain();
-            
+            canThrowDices = true;
         }
     }
 
