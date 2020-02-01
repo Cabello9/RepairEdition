@@ -135,6 +135,23 @@ public class Game : Singleton<Game>
                     token.throwAgain = true;
                     break;
                 case CellType.Throw:
+                    if (!CellIsEmpty(cellToAdvance))
+                    {
+                        token.cell = cellToAdvance;
+                        token.goalReached = false;
+                        token.hasToJumpToken = true;
+                        if (ThereIsEnemyToken(token, cellToAdvance))
+                            token.hasToKillToken = true;
+                        else
+                            token.hasToKillToken = false;
+                    }
+                    else
+                    {
+                        token.cell = cellToAdvance;
+                        token.goalReached = false;
+                        token.hasToJumpToken = false;
+                        token.hasToKillToken = false;
+                    }
                     token.throwAgain = true;
                     break;
                 case CellType.Normal:
