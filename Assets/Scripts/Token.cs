@@ -5,6 +5,9 @@ public class Token : MonoBehaviour
 {
     public bool isPlayerOne;
     public Cell cell;
+    public bool goalReached;
+    public bool hasToJumpToken;
+    public bool hasToKillToken;
     public AnimationCurve JumpCurve;
 
     public void MoveToPosition(Vector3 position, float duration)
