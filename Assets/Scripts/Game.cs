@@ -9,6 +9,9 @@ public class Game : MonoBehaviour
     public List<Token> playerOneTokens;
     public List<Token> playerTwoTokens;
 
+    public Cell playerOneStart;
+    public Cell playerTwoStart;
+
     public Cell selectedCell;
 
     private readonly int numberOfDices = 4;
@@ -34,6 +37,17 @@ public class Game : MonoBehaviour
         {
             Advance(token);
             UpdateMovements(token);
+        }
+        if (token.hasToKillToken)
+        {
+            if (token.isPlayerOne)
+            {
+                token.cell.playerTwoToken.cell = playerTwoStart;
+            }
+            else
+            {
+                token.cell.playerOneToken.cell = playerOneStart;
+            }
         }
     }
 
@@ -110,6 +124,9 @@ public class Game : MonoBehaviour
                         
                     }
                     break;
+                case CellType.Throw:
+
+                    break;
                 case CellType.Start:
                     break;
                 case CellType.None:
@@ -152,7 +169,7 @@ public class Game : MonoBehaviour
 
     public bool CellIsEmpty(Cell cell)
     {
-        return !cell.playerOneOn && !cell.playerTwoOn;
+        return !cell.playerOneToken && !cell.playerTwoToken;
     }
 
     public bool ThereIsTeamToken(Token token, Cell cell)
@@ -162,14 +179,14 @@ public class Game : MonoBehaviour
 
         if (token.isPlayerOne)
         {
-            if(pos != -1 && board.cells[pos].playerOneOn)
+            if(pos != -1 && board.cells[pos].playerOneToken)
             {
                 thereIsToken = true;
             }
         }
         else
         {
-            if (pos != -1 && board.cells[pos].playerTwoOn)
+            if (pos != -1 && board.cells[pos].playerTwoToken)
             {
                 thereIsToken = true;
             }
@@ -184,14 +201,14 @@ public class Game : MonoBehaviour
 
         if (token.isPlayerOne)
         {
-            if (pos != -1 && board.cells[pos].playerTwoOn)
+            if (pos != -1 && board.cells[pos].playerTwoToken)
             {
                 thereIsToken = true;
             }
         }
         else
         {
-            if (pos != -1 && board.cells[pos].playerOneOn)
+            if (pos != -1 && board.cells[pos].playerOneToken)
             {
                 thereIsToken = true;
             }

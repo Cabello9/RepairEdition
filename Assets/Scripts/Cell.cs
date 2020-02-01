@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public enum CellType{None, Normal, Start, Protection, Finish}
+public enum CellType{None, Normal, Start, Protection, Finish, Throw}
 
 public class Cell : MonoBehaviour
 {
@@ -15,8 +15,8 @@ public class Cell : MonoBehaviour
     public Cell downCell;
     public Cell rightCell;
 
-    public bool playerOneOn;
+    //public bool playerOneOn;
     public Token playerOneToken;
-    public bool playerTwoOn;
+    //public bool playerTwoOn;
     public Token playerTwoToken;
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2520276608846704936}
   - component: {fileID: 6891304052102499102}
   - component: {fileID: 909267448808372199}
+  - component: {fileID: -9024148559595090780}
   m_Layer: 0
   m_Name: Casilla
   m_TagString: Untagged
@@ -80,6 +81,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-9024148559595090780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486904629389050683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3537626695b16458662a7e40f98c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  nextCellPlayerOne: {fileID: 0}
+  nextCellPlayerTwo: {fileID: 0}
+  upCell: {fileID: 0}
+  leftCell: {fileID: 0}
+  downCell: {fileID: 0}
+  rightCell: {fileID: 0}
+  playerOneOn: 0
+  playerOneToken: {fileID: 0}
+  playerTwoOn: 0
+  playerTwoToken: {fileID: 0}
 --- !u!1 &8386343196712097258
 GameObject:
   m_ObjectHideFlags: 0
