@@ -88,6 +88,15 @@ public class Game : Singleton<Game>
         token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
         yield return new WaitForSeconds(0.5f);
         ChangeTurn();
+
+        if (turn == Turn.PlayerOne)
+        {
+            GameVisualManager.Instance.PlayerTurn(true);
+        }
+        else if (turn == Turn.PlayerTwo)
+        {
+            GameVisualManager.Instance.PlayerTurn(false);
+        }
     }
     
     IEnumerator CrushOpponent(Token murderer, Token victim, Transform target)
@@ -337,5 +346,50 @@ public class Game : Singleton<Game>
                 Move(selectedCell.playerTwoToken);
             }
         }
+    }
+
+    public void SpawnNewToken()
+    {
+        if (turn == Turn.PlayerOne)
+        {
+            foreach (var playerOneToken in playerOneTokens)
+            {
+                if (playerOneToken.cell != null && playerOneToken.cell.type == CellType.Start)
+                    StartCoroutine(SpawnTokenCoroutine(playerOneToken, true));
+
+            }
+        }
+        else if (turn == Turn.PlayerTwo)
+        {
+            foreach (var playerTwoToken in playerTwoTokens)
+            {
+                if(playerTwoToken.cell != null && playerTwoToken.cell.type == CellType.Start)
+                    StartCoroutine(SpawnTokenCoroutine(playerTwoToken, false));
+                    
+            }
+        }
+    }
+
+    public void SpawnToken(Token token, bool isPlayerOne)
+    {
+        StartCoroutine(SpawnTokenCoroutine(token,isPlayerOne));
+    }
+
+    IEnumerator SpawnTokenCoroutine(Token token, bool isPlayerOne)
+    {
+        if (isPlayerOne)
+        {
+            token.transform.position = playerOneStart.transform.GetChild(0).position;
+            token.transform.rotation = playerOneStart.transform.GetChild(0).rotation;
+        }
+        else
+        {
+            token.transform.position = playerTwoStart.transform.GetChild(0).position;
+            token.transform.rotation = playerTwoStart.transform.GetChild(0).rotation;
+        }
+        
+        token.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        Move(token);
     }
 }
