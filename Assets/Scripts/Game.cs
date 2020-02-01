@@ -131,7 +131,10 @@ public class Game : Singleton<Game>
                     {
                         token.cell = cellToAdvance;
                         token.goalReached = false;
-                        token.hasToJumpToken = true;
+                        if (IsLastMovement())
+                            token.hasToJumpToken = true;
+                        else
+                            token.hasToJumpToken = false;
                         token.hasToKillToken = false;
                     }
                     else
@@ -149,7 +152,7 @@ public class Game : Singleton<Game>
                         token.cell = cellToAdvance;
                         token.goalReached = false;
                         token.hasToJumpToken = true;
-                        if (ThereIsEnemyToken(token, cellToAdvance))
+                        if (IsLastMovement() && ThereIsEnemyToken(token, cellToAdvance))
                             token.hasToKillToken = true;
                         else
                             token.hasToKillToken = false;
