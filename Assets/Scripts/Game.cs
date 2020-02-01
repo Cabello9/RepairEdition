@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game : MonoBehaviour
+public enum Turn { None, PlayerOne, PlayerTwo}
+
+public class Game : Singleton<Game>
 {
     [Header("Game components")]
     public Board board;
@@ -11,13 +13,35 @@ public class Game : MonoBehaviour
 
     public Cell playerOneStart;
     public Cell playerTwoStart;
-
     public Cell selectedCell;
 
+    public int p1Points = 0;
+    public int p2Points = 0;
     private readonly int numberOfDices = 4;
-    public bool playerOneTurn;
-
     public int remainingMoves;
+    public Turn turn;
+    public bool throwAgain;
+
+    private void Start()
+    {
+        turn = Turn.PlayerOne;
+    }
+
+    public void ChangeTurn()
+    {
+        switch (turn)
+        {
+            case Turn.None:
+                turn = Turn.PlayerOne;
+                break;
+            case Turn.PlayerOne:
+                turn = Turn.PlayerTwo;
+                break;
+            case Turn.PlayerTwo:
+                turn = Turn.PlayerOne;
+                break;
+        }
+    }
 
     public int ThrowDices()
     {
@@ -49,6 +73,10 @@ public class Game : MonoBehaviour
                 token.cell.playerOneToken.cell = playerOneStart;
             }
         }
+        else if (!token.throwAgain)
+        {
+            ChangeTurn();
+        }
     }
 
     private bool ThereAreMoreMoves()
@@ -69,6 +97,7 @@ public class Game : MonoBehaviour
                     token.goalReached = true;
                     token.hasToJumpToken = false;
                     token.hasToKillToken = false;
+                    token.throwAgain = false;
                     break;
                 case CellType.Protection:
                     if (!CellIsEmpty(cellToAdvance))
@@ -85,6 +114,10 @@ public class Game : MonoBehaviour
                         token.hasToJumpToken = false;
                         token.hasToKillToken = false;
                     }
+                    token.throwAgain = true;
+                    break;
+                case CellType.Throw:
+                    token.throwAgain = true;
                     break;
                 case CellType.Normal:
                     if (CellIsEmpty(cellToAdvance))
@@ -121,11 +154,8 @@ public class Game : MonoBehaviour
                         {
                             token.hasToKillToken = false;
                         }
-                        
                     }
-                    break;
-                case CellType.Throw:
-
+                    token.throwAgain = false;
                     break;
                 case CellType.Start:
                     break;
