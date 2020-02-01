@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Board
+public class Board : MonoBehaviour
 {
-    public List<Cell> board;
+    public List<Cell> cells;
 
     public Cell UpCell(Cell currentCell)
     {
