@@ -8,17 +8,16 @@ public class GameInputManager : Singleton<GameInputManager>
 {
     private PlayerController PlayerOneController;
     private PlayerController PlayerTwoController;
-
-    public bool isPlayerOneTurn;
+    
     public bool canInput;
 
     private void Start()
     {
-        PlayerOneController.InitPlayerOne();
-        PlayerTwoController.InitPlayerTwo();
+        /*PlayerOneController.InitPlayerOne();
+        PlayerTwoController.InitPlayerTwo();*/
 
-        PlayerOneController.playerDevice = InputManager.Devices[0];
-        PlayerTwoController.playerDevice = InputManager.Devices[1];
+        /*PlayerOneController.playerDevice = InputManager.Devices[0];
+        PlayerTwoController.playerDevice = InputManager.Devices[1];*/
     }
 
     private void Update()

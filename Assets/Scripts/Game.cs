@@ -17,10 +17,12 @@ public class Game : Singleton<Game>
 
     public int p1Points = 0;
     public int p2Points = 0;
-    private List<Dice> dices;
+    public List<Dice> dices;
     public int remainingMoves;
     public Turn turn;
     public bool throwAgain;
+
+    public Cell defaultCell;
 
     private void Start()
     {
@@ -41,6 +43,8 @@ public class Game : Singleton<Game>
                 turn = Turn.PlayerOne;
                 break;
         }
+
+        selectedCell = defaultCell;
     }
 
     public int ThrowDices()
@@ -50,6 +54,7 @@ public class Game : Singleton<Game>
         foreach (var dice in dices)
         {
             dice.ThrowDice();
+            dice.RollAnimation();
             result += dice.GetValue();
         }
 
@@ -80,6 +85,8 @@ public class Game : Singleton<Game>
         
         if (!token.throwAgain)
         {
+            token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
+            
             if (token.goalReached)
             {
                 token.gameObject.SetActive(false);
@@ -103,7 +110,17 @@ public class Game : Singleton<Game>
             {
                Debug.Log("Jugador 2 ha ganado"); 
             }
+            else
+            {
+                StartCoroutine(ChangeTurnCoroutine(token));
+            }
         }
+    }
+
+    public void IlluminateDefaultCell()
+    {
+        selectedCell = defaultCell;
+        selectedCell.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     IEnumerator ChangeTurnCoroutine(Token token)
@@ -363,20 +380,23 @@ public class Game : Singleton<Game>
     
     private bool CheckTokenInCell(Turn turn, Cell cell)
     {
-        if (turn == Turn.PlayerOne)
+        if (cell != null)
         {
-            if (cell.playerOneToken != null)
-                return true;
+            if (turn == Turn.PlayerOne)
+            {
+                if (cell.playerOneToken != null)
+                    return true;
             
-            return false;
-        }
+                return false;
+            }
 
-        if(turn == Turn.PlayerTwo)
-        {
-            if (cell.playerTwoToken != null)
-                return true;
+            if(turn == Turn.PlayerTwo)
+            {
+                if (cell.playerTwoToken != null)
+                    return true;
             
-            return false;
+                return false;
+            }
         }
 
         return false;
@@ -404,7 +424,11 @@ public class Game : Singleton<Game>
             foreach (var playerOneToken in playerOneTokens)
             {
                 if (playerOneToken.cell != null && playerOneToken.cell.type == CellType.Start)
+                {
                     StartCoroutine(SpawnTokenCoroutine(playerOneToken, true));
+                    break;
+                }
+                    
 
             }
         }
@@ -412,8 +436,12 @@ public class Game : Singleton<Game>
         {
             foreach (var playerTwoToken in playerTwoTokens)
             {
-                if(playerTwoToken.cell != null && playerTwoToken.cell.type == CellType.Start)
+                if (playerTwoToken.cell != null && playerTwoToken.cell.type == CellType.Start)
+                {
                     StartCoroutine(SpawnTokenCoroutine(playerTwoToken, false));
+                    break;
+                }
+                    
                     
             }
         }

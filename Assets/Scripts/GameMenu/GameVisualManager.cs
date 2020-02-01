@@ -39,6 +39,7 @@ public class GameVisualManager : Singleton<GameVisualManager>
 
     public void PlayerTurn(bool isPlayerOne)
     {
+        GameInputManager.Instance.canInput = false;
         if (isPlayerOne) 
             ConfigPlayerOneTurn();
         else
@@ -57,6 +58,7 @@ public class GameVisualManager : Singleton<GameVisualManager>
         PlayerTurnText.DOMove(TurnScreenReferencePoints[2].position, TurnMoveDuration).OnComplete(() =>
         {
             PlayerTurnText.gameObject.SetActive(true);
+            GameInputManager.Instance.canInput = true;
         });
     }
 
@@ -86,9 +88,11 @@ public class GameVisualManager : Singleton<GameVisualManager>
         yield return new WaitForSeconds(2f);
         totalDicesValue = Game.Instance.ThrowDices();
         SetDiceValueHUD(totalDicesValue);
+        Game.Instance.remainingMoves = totalDicesValue;
         yield return new WaitForSeconds(3f);
         GoToInitCameraPosition();
         EnableHUD();
+        Game.Instance.IlluminateDefaultCell();
     }
 
     private void GoToDiceCameraPosition()
