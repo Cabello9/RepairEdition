@@ -32,27 +32,27 @@ public class GameInputManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W))
         {
-            
+            Game.Instance.SelectUpCell();
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            
+            Game.Instance.SelectLeftCell();
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            
+            Game.Instance.SelectDownCell();
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            
+            Game.Instance.SelectRightCell();
         }
         else if (Input.GetKeyDown(KeyCode.Q)) //Tirar dados
         {
-            
+            GameVisualManager.Instance.StartThrowDicesCinematic();
         }
         else if (Input.GetKeyDown(KeyCode.E)) //Seleccionar
         {
-            
+            Game.Instance.SelectCell();
         }
         else if (Input.GetKeyDown(KeyCode.R)) //Nueva ficha
         {
