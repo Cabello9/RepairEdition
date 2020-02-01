@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Board
 {
-    public List<Cell> cellsOnBoard;
-    public List<Cell> cellOffBoard;
+    public List<Cell> cells;
+    public List<Token> tokens;
 
+    
 }
