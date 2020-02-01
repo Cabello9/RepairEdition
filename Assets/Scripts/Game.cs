@@ -17,7 +17,7 @@ public class Game : Singleton<Game>
 
     public int p1Points = 0;
     public int p2Points = 0;
-    private readonly int numberOfDices = 4;
+    private List<Dice> dices;
     public int remainingMoves;
     public Turn turn;
     public bool throwAgain;
@@ -47,9 +47,10 @@ public class Game : Singleton<Game>
     {
         int result = 0;
 
-        for (int i = 0; i < numberOfDices; i++)
+        foreach (var dice in dices)
         {
-            result += Dice.ThrowDice();
+            dice.ThrowDice();
+            result += dice.GetValue();
         }
 
         return result;
@@ -61,22 +62,39 @@ public class Game : Singleton<Game>
         {
             Advance(token);
             UpdateMovements(token);
+            
         }
         if (token.hasToKillToken)
         {
             if (token.isPlayerOne)
             {
                 token.cell.playerTwoToken.cell = playerTwoStart;
+                StartCoroutine(CrushOpponent(token, token.cell.playerTwoToken, token.cell.transform.GetChild(0)));
             }
             else
             {
                 token.cell.playerOneToken.cell = playerOneStart;
+                StartCoroutine(CrushOpponent(token, token.cell.playerOneToken, token.cell.transform.GetChild(0)));
             }
         }
         else if (!token.throwAgain)
         {
-            ChangeTurn();
+            StartCoroutine(ChangeTurnCoroutine(token));
         }
+    }
+
+    IEnumerator ChangeTurnCoroutine(Token token)
+    {
+        token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        ChangeTurn();
+    }
+    
+    IEnumerator CrushOpponent(Token murderer, Token victim, Transform target)
+    {
+        murderer.Kill(target.position, 0.5f);
+        yield return new WaitForSeconds(0.4f);
+        victim.CrushYAxis(0.1f, 0.2f);
     }
 
     private bool ThereAreMoreMoves()
