@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using InControl;
 using UnityEngine;
 
-public class GameInputManager : MonoBehaviour
+public class GameInputManager : Singleton<GameInputManager>
 {
     private PlayerController PlayerOneController;
     private PlayerController PlayerTwoController;
 
     public bool isPlayerOneTurn;
+    public bool canInput;
 
     private void Start()
     {
@@ -22,10 +23,13 @@ public class GameInputManager : MonoBehaviour
 
     private void Update()
     {
-        if(isPlayerOneTurn)
-            CheckPlayerOneInput();
-        else
-            CheckPlayerTwoInput();
+        if (canInput)
+        {
+            if(Game.Instance.turn == Turn.PlayerOne)
+                CheckPlayerOneInput();
+            else if(Game.Instance.turn == Turn.PlayerTwo)
+                CheckPlayerTwoInput();
+        }
     }
 
     private void CheckPlayerOneInput()
@@ -56,7 +60,7 @@ public class GameInputManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.R)) //Nueva ficha
         {
-            
+            Game.Instance.SpawnNewToken();
         }
         
     }
@@ -65,31 +69,31 @@ public class GameInputManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
-            
+            Game.Instance.SelectUpCell();
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
-            
+            Game.Instance.SelectLeftCell(); 
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
-            
+            Game.Instance.SelectDownCell();
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
-            
+            Game.Instance.SelectRightCell();
         }
         else if (Input.GetKeyDown(KeyCode.U)) //Tirar dados
         {
-            
+            GameVisualManager.Instance.StartThrowDicesCinematic();
         }
         else if (Input.GetKeyDown(KeyCode.O)) //Seleccionar
         {
-            
+            Game.Instance.SelectCell();
         }
         else if (Input.GetKeyDown(KeyCode.P)) //Nueva ficha
         {
-            
+            Game.Instance.SpawnNewToken();
         }
     }
 }

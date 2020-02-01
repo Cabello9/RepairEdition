@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class Token : MonoBehaviour
@@ -11,6 +12,11 @@ public class Token : MonoBehaviour
     public bool throwAgain;
 
     public AnimationCurve JumpCurve;
+
+    private void Start()
+    {
+        cell.type = CellType.Start;
+    }
 
     public void MoveToPosition(Vector3 position, float duration)
     {
