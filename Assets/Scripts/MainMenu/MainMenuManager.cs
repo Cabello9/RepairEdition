@@ -12,7 +12,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void DoFade(float duration, Action OnFinish)
     {
-        Fade.DOFade(1, duration).OnComplete(() => { OnFinish(); });
+        Fade.DOFade(1, duration).OnComplete(() => { OnFinish?.Invoke(); });
     }
     
 
