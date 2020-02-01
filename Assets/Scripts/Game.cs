@@ -83,7 +83,7 @@ public class Game : Singleton<Game>
             }
         }
         
-        if (!token.throwAgain)
+        if (!throwAgain)
         {
             token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
             
@@ -114,6 +114,11 @@ public class Game : Singleton<Game>
             {
                 StartCoroutine(ChangeTurnCoroutine(token));
             }
+        }
+        else
+        {
+            token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
+            token.throwAgain = false;
         }
     }
 
@@ -165,6 +170,7 @@ public class Game : Singleton<Game>
                     token.hasToJumpToken = false;
                     token.hasToKillToken = false;
                     token.throwAgain = false;
+                    throwAgain = false;
                     break;
                 case CellType.Protection:
                     if (!CellIsEmpty(cellToAdvance))
@@ -184,27 +190,47 @@ public class Game : Singleton<Game>
                         token.hasToJumpToken = false;
                         token.hasToKillToken = false;
                     }
-                    token.throwAgain = true;
+                    token.throwAgain = false;
+                    throwAgain = false;
                     break;
                 case CellType.Throw:
-                    if (!CellIsEmpty(cellToAdvance))
-                    {
-                        token.cell = cellToAdvance;
-                        token.goalReached = false;
-                        token.hasToJumpToken = true;
-                        if (IsLastMovement() && ThereIsEnemyToken(token, cellToAdvance))
-                            token.hasToKillToken = true;
-                        else
-                            token.hasToKillToken = false;
-                    }
-                    else
+                    if (CellIsEmpty(cellToAdvance))
                     {
                         token.cell = cellToAdvance;
                         token.goalReached = false;
                         token.hasToJumpToken = false;
                         token.hasToKillToken = false;
                     }
+                    else if(ThereIsTeamToken(token, cellToAdvance))
+                    {
+                        token.cell = cellToAdvance;
+                        token.goalReached = false;
+                        if (IsLastMovement())
+                        {
+                            token.hasToJumpToken = true;
+                        }
+                        else
+                        {
+                            token.hasToJumpToken = false;
+                        }
+                        token.hasToKillToken = false;
+                    }
+                    else if(ThereIsEnemyToken(token, cellToAdvance))
+                    {
+                        token.cell = cellToAdvance;
+                        token.goalReached = false;
+                        token.hasToJumpToken = false;
+                        if (IsLastMovement())
+                        {
+                            token.hasToKillToken = true;
+                        }
+                        else
+                        {
+                            token.hasToKillToken = false;
+                        }
+                    }
                     token.throwAgain = true;
+                    throwAgain = true;
                     break;
                 case CellType.Normal:
                     if (CellIsEmpty(cellToAdvance))
@@ -243,6 +269,7 @@ public class Game : Singleton<Game>
                         }
                     }
                     token.throwAgain = false;
+                    throwAgain = false;
                     break;
                 case CellType.Start:
                     break;
