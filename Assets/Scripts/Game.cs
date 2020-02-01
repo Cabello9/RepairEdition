@@ -47,6 +47,16 @@ public class Game : Singleton<Game>
         selectedCell = defaultCell;
     }
 
+    public void ResetDices()
+    {
+        foreach (var dice in dices)
+        {
+            dice.currentValue = -1;
+            dice.animator.Rebind();
+            dice.ResetPosition();
+        }
+    }
+
     public int ThrowDices()
     {
         int result = 0;

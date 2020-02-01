@@ -83,6 +83,7 @@ public class GameVisualManager : Singleton<GameVisualManager>
     {
         int totalDicesValue;
         
+        Game.Instance.ResetDices();
         DisableHUD();
         GoToDiceCameraPosition();
         yield return new WaitForSeconds(2f);
