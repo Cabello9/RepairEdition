@@ -7,7 +7,7 @@ public enum Turn { None, PlayerOne, PlayerTwo}
 public class Game : Singleton<Game>
 {
     [Header("Game components")]
-    public Board board;
+    public List<Cell> board;
     public List<Token> playerOneTokens;
     public List<Token> playerTwoTokens;
 
@@ -224,6 +224,10 @@ public class Game : Singleton<Game>
         if (token.goalReached)
         {
             remainingMoves = 0;
+            if (token.isPlayerOne)
+                p1Points++;
+            else
+                p2Points++;
         }
         else if (!token.hasToJumpToken)
         {
@@ -252,18 +256,18 @@ public class Game : Singleton<Game>
     public bool ThereIsTeamToken(Token token, Cell cell)
     {
         bool thereIsToken = false;
-        int pos = board.cells.IndexOf(cell);
+        int pos = board.IndexOf(cell);
 
         if (token.isPlayerOne)
         {
-            if(pos != -1 && board.cells[pos].playerOneToken)
+            if(pos != -1 && board[pos].playerOneToken)
             {
                 thereIsToken = true;
             }
         }
         else
         {
-            if (pos != -1 && board.cells[pos].playerTwoToken)
+            if (pos != -1 && board[pos].playerTwoToken)
             {
                 thereIsToken = true;
             }
@@ -274,18 +278,18 @@ public class Game : Singleton<Game>
     public bool ThereIsEnemyToken(Token token, Cell cell)
     {
         bool thereIsToken = false;
-        int pos = board.cells.IndexOf(cell);
+        int pos = board.IndexOf(cell);
 
         if (token.isPlayerOne)
         {
-            if (pos != -1 && board.cells[pos].playerTwoToken)
+            if (pos != -1 && board[pos].playerTwoToken)
             {
                 thereIsToken = true;
             }
         }
         else
         {
-            if (pos != -1 && board.cells[pos].playerOneToken)
+            if (pos != -1 && board[pos].playerOneToken)
             {
                 thereIsToken = true;
             }
