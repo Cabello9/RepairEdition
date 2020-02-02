@@ -51,6 +51,7 @@ public class GameInputManager : Singleton<GameInputManager>
         }
         else if (Input.GetKeyDown(KeyCode.Q) && Game.Instance.canThrowDices) //Tirar dados
         {
+            GameVisualManager.Instance.needRoll = false;
             Game.Instance.canThrowDices = false;
             GameVisualManager.Instance.StartThrowDicesCinematic();
             Game.Instance.throwAgain = false;
@@ -86,6 +87,7 @@ public class GameInputManager : Singleton<GameInputManager>
         }
         else if (Input.GetKeyDown(KeyCode.U) && Game.Instance.canThrowDices) //Tirar dados
         {
+            GameVisualManager.Instance.needRoll = false;
             Game.Instance.canThrowDices = false;
             GameVisualManager.Instance.StartThrowDicesCinematic();
             Game.Instance.throwAgain = false;

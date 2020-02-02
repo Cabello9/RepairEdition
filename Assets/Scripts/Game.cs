@@ -48,7 +48,8 @@ public class Game : Singleton<Game>
                 turn = Turn.PlayerOne;
                 break;
         }
-
+        
+        GameVisualManager.Instance.ChangeTurnVisual();
         selectedCell = defaultCell;
     }
 
@@ -123,12 +124,12 @@ public class Game : Singleton<Game>
                 token.gameObject.SetActive(false);
             }
 
-            if (p1Points == 7)
+            if (p1Points >= 7)
             {
                 //Ha ganado alguien
                 Debug.Log("Jugador 1 ha ganado");
             }
-            else if (p2Points == 7)
+            else if (p2Points >= 7)
             {
                Debug.Log("Jugador 2 ha ganado"); 
             }
@@ -163,7 +164,7 @@ public class Game : Singleton<Game>
         token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
         yield return new WaitForSeconds(0.5f);
         ChangeTurn();
-
+        
         if (turn == Turn.PlayerOne)
         {
             GameVisualManager.Instance.PlayerTurn(true);

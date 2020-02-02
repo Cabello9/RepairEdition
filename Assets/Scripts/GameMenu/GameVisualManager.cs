@@ -17,8 +17,6 @@ public class GameVisualManager : Singleton<GameVisualManager>
     public Color PlayerOneColor;
     public Color PlayerTwoColor;
 
-    public List<Dice> dices;
-
     public bool isPlayerOneTurn = true;
 
     public Transform mainCamera;
@@ -26,6 +24,11 @@ public class GameVisualManager : Singleton<GameVisualManager>
     public Transform diceCameraPoint;
     public GameObject hud;
     public TextMeshProUGUI diceValue;
+    public TextMeshProUGUI staticTurnText;
+
+    private float time;
+    public float timeBeforeRoll;
+    public bool needRoll;
 
     private void Start()
     {
@@ -39,6 +42,7 @@ public class GameVisualManager : Singleton<GameVisualManager>
 
     public void PlayerTurn(bool isPlayerOne)
     {
+        DisableHUD();
         GameInputManager.Instance.canInput = false;
         if (isPlayerOne) 
             ConfigPlayerOneTurn();
@@ -47,6 +51,35 @@ public class GameVisualManager : Singleton<GameVisualManager>
 
         StartCoroutine(PlayerTurnMovement());
 
+    }
+
+    private void Update()
+    {
+        if (needRoll)
+        {
+            if (time >= timeBeforeRoll)
+            {
+                time = 0;
+                ConfigRollDiceAdvice();
+                StartCoroutine(PlayerTurnMovement());
+            }
+
+            time += Time.deltaTime;
+        }
+    }
+
+    private void ConfigRollDiceAdvice()
+    {
+        if (Game.Instance.turn == Turn.PlayerOne)
+        {
+            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerOneColor;
+        }
+        else if (Game.Instance.turn == Turn.PlayerTwo)
+        {
+            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
+        }
+        
+        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Roll Dices";
     }
 
     IEnumerator PlayerTurnMovement()
@@ -59,6 +92,9 @@ public class GameVisualManager : Singleton<GameVisualManager>
         {
             PlayerTurnText.gameObject.SetActive(true);
             GameInputManager.Instance.canInput = true;
+            ChangeTurnVisual();
+            needRoll = true;
+            EnableHUD();
         });
     }
 
@@ -94,19 +130,28 @@ public class GameVisualManager : Singleton<GameVisualManager>
         GoToInitCameraPosition();
         EnableHUD();
         Game.Instance.IlluminateDefaultCell();
-        
+
         if (totalDicesValue == 0)
         {
             Game.Instance.ChangeTurn();
             LoseTurn();
         }
-        
-        Game.Instance.ResetDices();
     }
 
-    public void ResetDiceValue()
+    public void ChangeTurnVisual()
     {
         diceValue.text = "";
+
+        if (Game.Instance.turn == Turn.PlayerOne)
+        {
+            staticTurnText.color = PlayerOneColor;
+            staticTurnText.text = "Player 1 turn";
+        }
+        else if (Game.Instance.turn == Turn.PlayerTwo)
+        {
+            staticTurnText.color = PlayerTwoColor;
+            staticTurnText.text = "Player 2 turn";
+        }
     }
     
     public void LoseTurn()
