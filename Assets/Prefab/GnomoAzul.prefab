@@ -526,10 +526,10 @@ MonoBehaviour:
   goalReached: 0
   hasToJumpToken: 0
   hasToKillToken: 0
-  starsP: {fileID: 0}
-  shieldP: {fileID: 0}
-  finishP: {fileID: 0}
-  rollDicesP: {fileID: 0}
+  starsP: {fileID: 8483798173475998221}
+  shieldP: {fileID: 7094984254410069844}
+  finishP: {fileID: 4598575995709479261}
+  rollDicesP: {fileID: 5656767952817011441}
   ownScale: {x: 0, y: 0, z: 0}
   JumpCurve:
     serializedVersion: 2
@@ -672,6 +672,30 @@ PrefabInstance:
 --- !u!4 &756703043689145407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6062170542697030020, guid: 210c51055c9b9ba4b9eedda3c4be316f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6818870492767143355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8483798173475998221 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3106920692250202038, guid: 210c51055c9b9ba4b9eedda3c4be316f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6818870492767143355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4598575995709479261 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7021131701181062374, guid: 210c51055c9b9ba4b9eedda3c4be316f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6818870492767143355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5656767952817011441 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1162384926675304266, guid: 210c51055c9b9ba4b9eedda3c4be316f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6818870492767143355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7094984254410069844 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4383985971337450223, guid: 210c51055c9b9ba4b9eedda3c4be316f,
     type: 3}
   m_PrefabInstance: {fileID: 6818870492767143355}
   m_PrefabAsset: {fileID: 0}
