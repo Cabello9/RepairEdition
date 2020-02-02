@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using InControl;
 using UnityEngine;
 
 public class GameInputManager : Singleton<GameInputManager>
 {
-    private PlayerController PlayerOneController;
-    private PlayerController PlayerTwoController;
     
     public bool canInput;
 
