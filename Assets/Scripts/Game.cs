@@ -136,8 +136,7 @@ public class Game : Singleton<Game>
             
             if (token.goalReached)
             {
-                TokenFinish(token);
-
+              
                 if (turn == Turn.PlayerOne)
                 {
                     GameVisualManager.Instance.UpdatePlayerOneHouse(p1Points);
@@ -197,9 +196,9 @@ public class Game : Singleton<Game>
     IEnumerator TokenFinish(Token token)
     {
         token.finishP.Play();
+        token.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.3f);
         audioManager.PlayWinSound();
-        token.gameObject.SetActive(false);
     }
 
     IEnumerator RollAgainCoroutine(Token token)
@@ -401,6 +400,8 @@ public class Game : Singleton<Game>
                 p1Points++;
             else
                 p2Points++;
+
+            token.gameObject.SetActive(false);
         }
         else if (!token.hasToJumpToken)
         {

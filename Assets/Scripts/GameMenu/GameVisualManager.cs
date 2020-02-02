@@ -218,7 +218,7 @@ public class GameVisualManager : Singleton<GameVisualManager>
         GameInputManager.Instance.canInput = false;
         if (Game.Instance.turn == Turn.PlayerOne)
         {
-            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
+            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerOneColor;
         }
         else if (Game.Instance.turn == Turn.PlayerTwo)
         {
