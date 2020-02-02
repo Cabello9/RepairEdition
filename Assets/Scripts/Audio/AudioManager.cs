@@ -20,6 +20,7 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip solidSnakeSound;
     public AudioClip gnomeTalkSound;
     public AudioClip crashSound;
+    public AudioClip rollDiceSound;
 
     
     #region Music
@@ -71,6 +72,11 @@ public class AudioManager : Singleton<AudioManager>
     public void PlayGnomeTalkSound()
     {
         sfxAudioSource.PlayOneShot(gnomeTalkSound);
+    }
+
+    public void PlayDiceRoll()
+    {
+        sfxAudioSource.PlayOneShot(rollDiceSound);
     }
 
     #endregion
