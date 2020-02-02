@@ -127,7 +127,7 @@ public class Game : Singleton<Game>
         
         if (!throwAgain)
         {
-            token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
+            StartCoroutine(ShieldEffect(token));
             
             if (token.goalReached)
             {
@@ -164,6 +164,21 @@ public class Game : Singleton<Game>
             GameVisualManager.Instance.RollAgain();
             canThrowDices = true;
             
+        }
+    }
+
+    IEnumerator ShieldEffect(Token token)
+    {
+        token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
+
+        if (token.cell.type == CellType.Protection)
+        {
+            yield return new WaitForSeconds(0.5f);
+            token.ActivateShield();
+        }
+        else
+        {
+            token.DeactivateShield();
         }
     }
 
