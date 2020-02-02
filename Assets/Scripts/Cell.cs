@@ -9,6 +9,9 @@ public class Cell : MonoBehaviour
     public Cell nextCellPlayerOne;
     public Cell nextCellPlayerTwo;
 
+    public Material playerOneMaterial;
+    public Material playerTwoMaterial;
+
     [Header("Neighbors")]
     public Cell upCell;
     public Cell leftCell;

@@ -505,6 +505,8 @@ MonoBehaviour:
   type: 1
   nextCellPlayerOne: {fileID: 0}
   nextCellPlayerTwo: {fileID: 0}
+  playerOneMaterial: {fileID: 2100000, guid: da049cb97b874b14cbba0e35e52ab47b, type: 2}
+  playerTwoMaterial: {fileID: 2100000, guid: f2613fc778501924396201ecebdd22af, type: 2}
   upCell: {fileID: 0}
   leftCell: {fileID: 0}
   downCell: {fileID: 0}
