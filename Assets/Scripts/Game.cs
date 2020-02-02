@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public enum Turn { None, PlayerOne, PlayerTwo}
@@ -149,11 +150,17 @@ public class Game : Singleton<Game>
 
             if (p1Points >= 7)
             {
-                //Ha ganado alguien
-                Debug.Log("Jugador 1 ha ganado");
+                GameVisualManager.Instance.winner.text = "Player 1 Wins";
+                GameVisualManager.Instance.winner.color = GameVisualManager.Instance.PlayerOneColor;
+                GameVisualManager.Instance.victoryPanel.SetActive(true);
+                GameVisualManager.Instance.victoryPanel.transform.DOScale(new Vector3(1, 1, 1), 0.5f);
             }
             else if (p2Points >= 7)
             {
+                GameVisualManager.Instance.winner.text = "Player 2 Wins";
+                GameVisualManager.Instance.winner.color = GameVisualManager.Instance.PlayerTwoColor;
+                GameVisualManager.Instance.victoryPanel.SetActive(true);
+                GameVisualManager.Instance.victoryPanel.transform.DOScale(new Vector3(1, 1, 1), 0.5f);
                Debug.Log("Jugador 2 ha ganado"); 
             }
             else

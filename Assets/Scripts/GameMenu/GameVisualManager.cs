@@ -43,6 +43,9 @@ public class GameVisualManager : Singleton<GameVisualManager>
     [Header("Audio Manager")]
     public AudioManager audioManager;
 
+    public GameObject victoryPanel;
+    public TextMeshProUGUI winner;
+
     private void Start()
     {
         DoFade(0, () => { PlayerTurn(isPlayerOneTurn); });
