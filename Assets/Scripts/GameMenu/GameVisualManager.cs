@@ -40,8 +40,8 @@ public class GameVisualManager : Singleton<GameVisualManager>
     public List<ParticleSystem> smokePlayerOneHouse;
     public List<ParticleSystem> smokePlayerTwoHouse;
 
-    public GameObject victoryPanel;
-    public TextMeshProUGUI winner;
+    [Header("Audio Manager")]
+    public AudioManager audioManager;
 
     private void Start()
     {
@@ -180,8 +180,8 @@ public class GameVisualManager : Singleton<GameVisualManager>
 
         if (totalDicesValue == 0)
         {
-            Game.Instance.ChangeTurn();
             LoseTurn();
+            Game.Instance.ChangeTurn();
         }
     }
 

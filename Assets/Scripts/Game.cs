@@ -25,8 +25,8 @@ public class Game : Singleton<Game>
     public Cell defaultCell;
     public bool canThrowDices;
 
-    public bool playerOneWins;
-    public bool playerTwoWins;
+    [Header("Audio Manager")]
+    public AudioManager audioManager;
 
     private void Start()
     {
@@ -36,6 +36,7 @@ public class Game : Singleton<Game>
         {
             c.ChangeMaterial(turn);
         }
+        audioManager.PlayBackgroundMusic();
     }
 
     public void ChangeTurn()
@@ -134,7 +135,7 @@ public class Game : Singleton<Game>
             
             if (token.goalReached)
             {
-                token.gameObject.SetActive(false);
+                TokenFinish(token);
 
                 if (turn == Turn.PlayerOne)
                 {
@@ -148,16 +149,12 @@ public class Game : Singleton<Game>
 
             if (p1Points >= 7)
             {
-                GameVisualManager.Instance.winner.text = "Player 1 Wins";
-                GameVisualManager.Instance.winner.color = GameVisualManager.Instance.PlayerOneColor;
-                playerOneWins = true;
+                //Ha ganado alguien
+                Debug.Log("Jugador 1 ha ganado");
             }
             else if (p2Points >= 7)
             {
-                GameVisualManager.Instance.winner.text = "Player 2 Wins";
-                GameVisualManager.Instance.winner.color = GameVisualManager.Instance.PlayerTwoColor;
-                Debug.Log("Jugador 2 ha ganado");
-                playerTwoWins = true;
+               Debug.Log("Jugador 2 ha ganado"); 
             }
             else
             {
@@ -177,10 +174,11 @@ public class Game : Singleton<Game>
     IEnumerator ShieldEffect(Token token)
     {
         token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        audioManager.PlayJumpSound();
 
         if (token.cell.type == CellType.Protection)
         {
-            yield return new WaitForSeconds(0.5f);
             token.ActivateShield();
         }
         else
@@ -200,6 +198,7 @@ public class Game : Singleton<Game>
     {
         token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
         yield return new WaitForSeconds(0.5f);
+        audioManager.PlayJumpSound();
         token.rollDicesP.Play();
     }
 
@@ -234,6 +233,7 @@ public class Game : Singleton<Game>
     {
         murderer.Kill(target.position, 0.5f);
         yield return new WaitForSeconds(0.4f);
+        audioManager.PlayStompSound();
 
         if (murderer.cell.type == CellType.Protection)
         {
