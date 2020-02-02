@@ -505,6 +505,17 @@ MonoBehaviour:
   type: 1
   nextCellPlayerOne: {fileID: 0}
   nextCellPlayerTwo: {fileID: 0}
+  playerOneMaterial: {fileID: 2100000, guid: da049cb97b874b14cbba0e35e52ab47b, type: 2}
+  playerTwoMaterial: {fileID: 2100000, guid: f2613fc778501924396201ecebdd22af, type: 2}
+  meshRenderers:
+  - {fileID: 5791207174481413841}
+  - {fileID: 5160679809904699389}
+  - {fileID: 4754812740790486330}
+  - {fileID: 5478986455705967796}
+  - {fileID: 2708159838680972544}
+  - {fileID: 3675864178269507714}
+  - {fileID: 2811664388427592015}
+  - {fileID: 3107770837406503196}
   upCell: {fileID: 0}
   leftCell: {fileID: 0}
   downCell: {fileID: 0}
