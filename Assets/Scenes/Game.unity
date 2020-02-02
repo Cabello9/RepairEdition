@@ -1515,7 +1515,7 @@ RectTransform:
   m_GameObject: {fileID: 393891787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1570809321}
   - {fileID: 492897948}
@@ -3277,7 +3277,8 @@ MonoBehaviour:
   smokePlayerTwoHouse:
   - {fileID: 726489645}
   - {fileID: 2054372811}
-  audioManager: {fileID: 0}
+  victoryPanel: {fileID: 393891787}
+  winner: {fileID: 1570809322}
 --- !u!4 &788964773
 Transform:
   m_ObjectHideFlags: 0
@@ -3563,7 +3564,6 @@ MonoBehaviour:
   throwAgain: 0
   defaultCell: {fileID: 1480157406}
   canThrowDices: 0
-  audioManager: {fileID: 0}
 --- !u!1001 &878210492
 PrefabInstance:
   m_ObjectHideFlags: 0
