@@ -122,6 +122,15 @@ public class Game : Singleton<Game>
             if (token.goalReached)
             {
                 token.gameObject.SetActive(false);
+
+                if (turn == Turn.PlayerOne)
+                {
+                    GameVisualManager.Instance.UpdatePlayerOneHouse(p1Points);
+                }
+                else if (turn == Turn.PlayerTwo)
+                {
+                    GameVisualManager.Instance.UpdatePlayerTwoHouse(p2Points);
+                }
             }
 
             if (p1Points >= 7)

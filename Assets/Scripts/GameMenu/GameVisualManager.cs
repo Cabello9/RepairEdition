@@ -30,6 +30,9 @@ public class GameVisualManager : Singleton<GameVisualManager>
     public float timeBeforeRoll;
     public bool needRoll;
 
+    public List<GameObject> playerOneHouseParts;
+    public List<GameObject> playerTwoHouseParts;
+
     private void Start()
     {
         DoFade(0, () => { PlayerTurn(isPlayerOneTurn); });
@@ -51,6 +54,30 @@ public class GameVisualManager : Singleton<GameVisualManager>
 
         StartCoroutine(PlayerTurnMovement());
 
+    }
+
+    IEnumerator UpdatePlayerOneHouseCoroutine(int value)
+    {
+        playerOneHouseParts[value - 1].SetActive(true);
+        yield return null;
+        //Efecto de particulas
+    }
+
+    IEnumerator UpdatePlayerTwoHouseCoroutine(int value)
+    {
+        playerTwoHouseParts[value - 1].SetActive(true);
+        yield return null;
+        //Efecto de particulas
+    }
+
+    public void UpdatePlayerOneHouse(int value)
+    {
+        StartCoroutine(UpdatePlayerOneHouseCoroutine(value));
+    }
+
+    public void UpdatePlayerTwoHouse(int value)
+    {
+        StartCoroutine(UpdatePlayerTwoHouseCoroutine(value));
     }
 
     private void Update()
@@ -101,13 +128,13 @@ public class GameVisualManager : Singleton<GameVisualManager>
     private void ConfigPlayerOneTurn()
     {
         PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerOneColor;
-        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Turno del Jugador 1";
+        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Player 1 turn";
     }
 
     private void ConfigPlayerTwoTurn()
     {
         PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
-        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Turno del Jugador 2";
+        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Player 2 turn";
     }
 
     public void StartThrowDicesCinematic()
@@ -128,6 +155,7 @@ public class GameVisualManager : Singleton<GameVisualManager>
         Game.Instance.remainingMoves = totalDicesValue;
         yield return new WaitForSeconds(3f);
         GoToInitCameraPosition();
+        yield return new WaitForSeconds(2f);
         EnableHUD();
         Game.Instance.IlluminateDefaultCell();
 
@@ -166,7 +194,7 @@ public class GameVisualManager : Singleton<GameVisualManager>
             PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
         }
         
-        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Has perdido el turno";
+        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "You lose your turn";
         
         StartCoroutine(PlayerTurnMovement());
     }
@@ -176,14 +204,14 @@ public class GameVisualManager : Singleton<GameVisualManager>
         GameInputManager.Instance.canInput = false;
         if (Game.Instance.turn == Turn.PlayerOne)
         {
-            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
+            PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerOneColor;
         }
         else if (Game.Instance.turn == Turn.PlayerTwo)
         {
             PlayerTurnText.GetComponent<TextMeshProUGUI>().color = PlayerTwoColor;
         }
         
-        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Tira los dados otra vez";
+        PlayerTurnText.GetComponent<TextMeshProUGUI>().text = "Roll dices again";
         
         StartCoroutine(PlayerTurnMovement());
     }
