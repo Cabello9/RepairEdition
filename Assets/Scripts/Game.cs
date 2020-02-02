@@ -160,11 +160,25 @@ public class Game : Singleton<Game>
         else
         {
             LightOffDefaultCell();
-            token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
+            StartCoroutine(RollAgainCoroutine(token));
             GameVisualManager.Instance.RollAgain();
             canThrowDices = true;
             
         }
+    }
+
+    IEnumerator TokenFinish(Token token)
+    {
+        token.finishP.Play();
+        yield return new WaitForSeconds(0.3f);
+        token.gameObject.SetActive(false);
+    }
+
+    IEnumerator RollAgainCoroutine(Token token)
+    {
+        token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        token.rollDicesP.Play();
     }
 
     public void IlluminateDefaultCell()
@@ -198,6 +212,17 @@ public class Game : Singleton<Game>
     {
         murderer.Kill(target.position, 0.5f);
         yield return new WaitForSeconds(0.4f);
+
+        if (murderer.cell.type == CellType.Protection)
+        {
+            murderer.ActivateShield();
+        }
+        else
+        {
+            murderer.DeactivateShield();
+        }
+        
+        murderer.starsP.Play();
         victim.CrushYAxis(0.1f, 0.2f);
         yield return new WaitForSeconds(0.3f);
         victim.gameObject.SetActive(false);

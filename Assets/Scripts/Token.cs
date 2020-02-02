@@ -11,6 +11,11 @@ public class Token : MonoBehaviour
     public bool goalReached;
     public bool hasToJumpToken;
     public bool hasToKillToken;
+
+    public ParticleSystem starsP;
+    public ParticleSystem shieldP;
+    public ParticleSystem finishP;
+    public ParticleSystem rollDicesP;
     
     public Vector3 ownScale;
 
@@ -21,6 +26,18 @@ public class Token : MonoBehaviour
         cell.type = CellType.Start;
         initialPosition = transform.position;
         initialRotation = transform.rotation;
+    }
+
+    public void DeactivateShield()
+    {
+        shieldP.Stop();
+        shieldP.gameObject.SetActive(false);
+    }
+
+    public void ActivateShield()
+    {
+        shieldP.gameObject.SetActive(true);
+        shieldP.Play();
     }
 
     public void RestoreScale()
