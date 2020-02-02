@@ -29,6 +29,10 @@ public class Game : Singleton<Game>
     {
         turn = Turn.PlayerOne;
         canThrowDices = true;
+        foreach(Cell c in board)
+        {
+            c.ChangeMaterial(turn);
+        }
     }
 
     public void ChangeTurn()
@@ -48,7 +52,7 @@ public class Game : Singleton<Game>
                 turn = Turn.PlayerOne;
                 break;
         }
-        
+        ChangeCellsMaterial(turn);
         GameVisualManager.Instance.ChangeTurnVisual();
         selectedCell = defaultCell;
     }
@@ -61,6 +65,12 @@ public class Game : Singleton<Game>
             dice.animator.Rebind();
             dice.ResetPosition();
         }
+    }
+
+    public void ChangeCellsMaterial(Turn turn)
+    {
+        foreach (Cell c in board)
+            c.ChangeMaterial(turn);
     }
 
     public int ThrowDices()
