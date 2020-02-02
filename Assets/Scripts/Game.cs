@@ -191,6 +191,7 @@ public class Game : Singleton<Game>
     {
         token.finishP.Play();
         yield return new WaitForSeconds(0.3f);
+        audioManager.PlayWinSound();
         token.gameObject.SetActive(false);
     }
 
@@ -199,6 +200,7 @@ public class Game : Singleton<Game>
         token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
         yield return new WaitForSeconds(0.5f);
         audioManager.PlayJumpSound();
+        audioManager.PlayDiceRoll();
         token.rollDicesP.Play();
     }
 
