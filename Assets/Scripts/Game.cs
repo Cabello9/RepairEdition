@@ -26,6 +26,9 @@ public class Game : Singleton<Game>
     public Cell defaultCell;
     public bool canThrowDices;
 
+    [Header("Audio Manager")]
+    public AudioManager audioManager;
+
     private void Start()
     {
         turn = Turn.PlayerOne;
@@ -34,6 +37,7 @@ public class Game : Singleton<Game>
         {
             c.ChangeMaterial(turn);
         }
+        audioManager.PlayBackgroundMusic();
     }
 
     public void ChangeTurn()
@@ -132,7 +136,7 @@ public class Game : Singleton<Game>
             
             if (token.goalReached)
             {
-                token.gameObject.SetActive(false);
+                TokenFinish(token);
 
                 if (turn == Turn.PlayerOne)
                 {
@@ -177,10 +181,11 @@ public class Game : Singleton<Game>
     IEnumerator ShieldEffect(Token token)
     {
         token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        audioManager.PlayJumpSound();
 
         if (token.cell.type == CellType.Protection)
         {
-            yield return new WaitForSeconds(0.5f);
             token.ActivateShield();
         }
         else
@@ -200,6 +205,7 @@ public class Game : Singleton<Game>
     {
         token.JumpToPosition(token.cell.transform.GetChild(0).position, 0.5f);
         yield return new WaitForSeconds(0.5f);
+        audioManager.PlayJumpSound();
         token.rollDicesP.Play();
     }
 
@@ -234,6 +240,7 @@ public class Game : Singleton<Game>
     {
         murderer.Kill(target.position, 0.5f);
         yield return new WaitForSeconds(0.4f);
+        audioManager.PlayStompSound();
 
         if (murderer.cell.type == CellType.Protection)
         {
