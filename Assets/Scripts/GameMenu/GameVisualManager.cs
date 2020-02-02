@@ -175,6 +175,7 @@ public class GameVisualManager : Singleton<GameVisualManager>
         totalDicesValue = Game.Instance.ThrowDices();
         SetDiceValueHUD(totalDicesValue);
         Game.Instance.remainingMoves = totalDicesValue;
+        StartCoroutine(nameof(DiceRollCoroutine));
         yield return new WaitForSeconds(3f);
         GoToInitCameraPosition();
         yield return new WaitForSeconds(2f);
@@ -186,6 +187,12 @@ public class GameVisualManager : Singleton<GameVisualManager>
             LoseTurn();
             Game.Instance.ChangeTurn();
         }
+    }
+
+    IEnumerator DiceRollCoroutine()
+    {
+        yield return new WaitForSeconds(0.8f);
+        audioManager.PlayDiceRoll();
     }
 
     public void ChangeTurnVisual()
