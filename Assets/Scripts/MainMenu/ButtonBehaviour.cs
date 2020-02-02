@@ -11,6 +11,7 @@ public class ButtonBehaviour : MonoBehaviour
     public void OnClick()
     {
         transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), duration).SetEase(curve);
+        Invoke(nameof(OnDeselect), duration);
     }
 
     public void OnSelect()
