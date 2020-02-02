@@ -40,6 +40,9 @@ public class GameVisualManager : Singleton<GameVisualManager>
     public List<ParticleSystem> smokePlayerOneHouse;
     public List<ParticleSystem> smokePlayerTwoHouse;
 
+    public GameObject victoryPanel;
+    public TextMeshProUGUI winner;
+
     private void Start()
     {
         DoFade(0, () => { PlayerTurn(isPlayerOneTurn); });

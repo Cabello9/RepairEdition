@@ -25,6 +25,9 @@ public class Game : Singleton<Game>
     public Cell defaultCell;
     public bool canThrowDices;
 
+    public bool playerOneWins;
+    public bool playerTwoWins;
+
     private void Start()
     {
         turn = Turn.PlayerOne;
@@ -145,12 +148,16 @@ public class Game : Singleton<Game>
 
             if (p1Points >= 7)
             {
-                //Ha ganado alguien
-                Debug.Log("Jugador 1 ha ganado");
+                GameVisualManager.Instance.winner.text = "Player 1 Wins";
+                GameVisualManager.Instance.winner.color = GameVisualManager.Instance.PlayerOneColor;
+                playerOneWins = true;
             }
             else if (p2Points >= 7)
             {
-               Debug.Log("Jugador 2 ha ganado"); 
+                GameVisualManager.Instance.winner.text = "Player 2 Wins";
+                GameVisualManager.Instance.winner.color = GameVisualManager.Instance.PlayerTwoColor;
+                Debug.Log("Jugador 2 ha ganado");
+                playerTwoWins = true;
             }
             else
             {
