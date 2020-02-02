@@ -33,6 +33,13 @@ public class GameVisualManager : Singleton<GameVisualManager>
     public List<GameObject> playerOneHouseParts;
     public List<GameObject> playerTwoHouseParts;
 
+    public Image controls;
+    public Sprite player1Controls;
+    public Sprite player2Controls;
+
+    public List<ParticleSystem> smokePlayerOneHouse;
+    public List<ParticleSystem> smokePlayerTwoHouse;
+
     private void Start()
     {
         DoFade(0, () => { PlayerTurn(isPlayerOneTurn); });
@@ -58,16 +65,25 @@ public class GameVisualManager : Singleton<GameVisualManager>
 
     IEnumerator UpdatePlayerOneHouseCoroutine(int value)
     {
+        foreach (var smoke in smokePlayerOneHouse)
+        {
+            smoke.Play();
+        }
+
+        yield return new WaitForSeconds(1f);
         playerOneHouseParts[value - 1].SetActive(true);
-        yield return null;
-        //Efecto de particulas
+
     }
 
     IEnumerator UpdatePlayerTwoHouseCoroutine(int value)
     {
+        foreach (var smoke in smokePlayerTwoHouse)
+        {
+            smoke.Play();
+        }
+
+        yield return new WaitForSeconds(1f);
         playerTwoHouseParts[value - 1].SetActive(true);
-        yield return null;
-        //Efecto de particulas
     }
 
     public void UpdatePlayerOneHouse(int value)
@@ -174,11 +190,13 @@ public class GameVisualManager : Singleton<GameVisualManager>
         {
             staticTurnText.color = PlayerOneColor;
             staticTurnText.text = "Player 1 turn";
+            controls.sprite = player1Controls;
         }
         else if (Game.Instance.turn == Turn.PlayerTwo)
         {
             staticTurnText.color = PlayerTwoColor;
             staticTurnText.text = "Player 2 turn";
+            controls.sprite = player2Controls;
         }
     }
     
