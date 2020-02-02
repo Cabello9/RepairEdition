@@ -9,7 +9,7 @@ public class Cell : MonoBehaviour
 
     public Cell nextCellPlayerOne;
     public Cell nextCellPlayerTwo;
-
+    public Transform referencePoint;
     public Material playerOneMaterial;
     public Material playerTwoMaterial;
     public List<MeshRenderer> meshRenderers;

@@ -11,7 +11,7 @@ public class Token : MonoBehaviour
     public bool goalReached;
     public bool hasToJumpToken;
     public bool hasToKillToken;
-
+    
     public Vector3 ownScale;
 
     public AnimationCurve JumpCurve;
@@ -60,6 +60,8 @@ public class Token : MonoBehaviour
     
     public void JumpToPosition(Vector3 position, float duration)
     {
-        transform.DOJump(position, 1f, 1, duration);
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(transform.DOJump(position, 1f, 1, duration)).
+            Append(transform.DORotate(cell.referencePoint.eulerAngles, 0.5f));
     }
 }
