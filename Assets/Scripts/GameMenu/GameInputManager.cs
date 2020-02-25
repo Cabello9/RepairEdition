@@ -8,15 +8,6 @@ public class GameInputManager : Singleton<GameInputManager>
     
     public bool canInput;
 
-    private void Start()
-    {
-        /*PlayerOneController.InitPlayerOne();
-        PlayerTwoController.InitPlayerTwo();*/
-
-        /*PlayerOneController.playerDevice = InputManager.Devices[0];
-        PlayerTwoController.playerDevice = InputManager.Devices[1];*/
-    }
-
     private void Update()
     {
         if (canInput)

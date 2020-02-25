@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ public class Token : MonoBehaviour
     public Vector3 ownScale;
 
     public AnimationCurve JumpCurve;
+    
+    private Tween currenTween;
+    private Sequence sequence;
 
     private void Start()
     {
@@ -57,28 +61,51 @@ public class Token : MonoBehaviour
 
     public void MoveToPosition(Vector3 position, float duration)
     {
-        transform.DOMove(position, duration);
+        currenTween = transform.DOMove(position, duration);
     }
 
     public void LookAt(Vector3 target, float duration)
     {
-        transform.DOLookAt(target, duration);
+        currenTween = transform.DOLookAt(target, duration);
     }
 
     public void Kill(Vector3 position, float duration)
     {
-        transform.DOJump(position,1.5f,1, duration).SetEase(JumpCurve);
+        currenTween = transform.DOJump(position,1.5f,1, duration).SetEase(JumpCurve);
     }
 
     public void CrushYAxis(float finalY,float duration)
     {
-        transform.DOScaleY(finalY, duration);
+        currenTween = transform.DOScaleY(finalY, duration);
     }
     
     public void JumpToPosition(Vector3 position, float duration)
     {
-        Sequence sequence = DOTween.Sequence();
+        sequence = DOTween.Sequence();
         sequence.Append(transform.DOJump(position, 1f, 1, duration)).
             Append(transform.DORotate(cell.referencePoint.eulerAngles, 0.5f));
+    }
+
+    public void Finish(Vector3 position)
+    {
+        StartCoroutine(DelayFinish(position));
+    }
+
+    IEnumerator DelayFinish(Vector3 position)
+    {
+        finishP.Play();
+        yield return new WaitForSeconds(0.8f);
+        JumpToPosition(position, 0.7f);
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
+    }
+    public void FinishVisualContent()
+    {
+        starsP.Stop();
+        shieldP.Stop();
+        finishP.Stop();
+        rollDicesP.Stop();
+        sequence?.Kill();
+        currenTween?.Kill();
     }
 }

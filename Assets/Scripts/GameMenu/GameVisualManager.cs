@@ -30,21 +30,18 @@ public class GameVisualManager : Singleton<GameVisualManager>
     public float timeBeforeRoll;
     public bool needRoll;
 
-    public List<GameObject> playerOneHouseParts;
-    public List<GameObject> playerTwoHouseParts;
-
     public Image controls;
     public Sprite player1Controls;
     public Sprite player2Controls;
-
-    public List<ParticleSystem> smokePlayerOneHouse;
-    public List<ParticleSystem> smokePlayerTwoHouse;
 
     [Header("Audio Manager")]
     public AudioManager audioManager;
 
     public GameObject victoryPanel;
     public TextMeshProUGUI winner;
+
+    public House redHouse;
+    public House blueHouse;
 
     private void Start()
     {
@@ -69,37 +66,16 @@ public class GameVisualManager : Singleton<GameVisualManager>
 
     }
 
-    IEnumerator UpdatePlayerOneHouseCoroutine(int value)
-    {
-        foreach (var smoke in smokePlayerOneHouse)
-        {
-            smoke.Play();
-        }
-
-        yield return new WaitForSeconds(1f);
-        playerOneHouseParts[value - 1].SetActive(true);
-
-    }
-
-    IEnumerator UpdatePlayerTwoHouseCoroutine(int value)
-    {
-        foreach (var smoke in smokePlayerTwoHouse)
-        {
-            smoke.Play();
-        }
-
-        yield return new WaitForSeconds(1f);
-        playerTwoHouseParts[value - 1].SetActive(true);
-    }
-
     public void UpdatePlayerOneHouse(int value)
     {
-        StartCoroutine(UpdatePlayerOneHouseCoroutine(value));
+        redHouse.CurrentBuildingPart = value;
+        redHouse.RepairPart();
     }
 
     public void UpdatePlayerTwoHouse(int value)
     {
-        StartCoroutine(UpdatePlayerTwoHouseCoroutine(value));
+        blueHouse.CurrentBuildingPart = value;
+        blueHouse.RepairPart();
     }
 
     private void Update()
@@ -171,14 +147,14 @@ public class GameVisualManager : Singleton<GameVisualManager>
         Game.Instance.ResetDices();
         DisableHUD();
         GoToDiceCameraPosition();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         totalDicesValue = Game.Instance.ThrowDices();
         SetDiceValueHUD(totalDicesValue);
         Game.Instance.remainingMoves = totalDicesValue;
         StartCoroutine(nameof(DiceRollCoroutine));
-        yield return new WaitForSeconds(3f);
-        GoToInitCameraPosition();
         yield return new WaitForSeconds(2f);
+        GoToInitCameraPosition();
+        yield return new WaitForSeconds(0.5f);
         EnableHUD();
         Game.Instance.IlluminateDefaultCell();
 
@@ -249,12 +225,12 @@ public class GameVisualManager : Singleton<GameVisualManager>
 
     private void GoToDiceCameraPosition()
     {
-        mainCamera.DOMove(diceCameraPoint.position, 1.5f);
+        mainCamera.DOMove(diceCameraPoint.position, 0.5f);
     }
 
     private void GoToInitCameraPosition()
     {
-        mainCamera.DOMove(initCameraPoint.position, 1.5f);
+        mainCamera.DOMove(initCameraPoint.position, 0.5f);
     }
 
     private void DisableHUD()
